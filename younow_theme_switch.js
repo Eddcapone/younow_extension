@@ -1,25 +1,28 @@
 // ==UserScript==
 // @name         younow_design_switch
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  switch between bright/dark theme on younow
 // @author       Eduard Fekete
-// @match        https://www.younow.com/*
-// @grant        none
+// @include      *
+// @grant GM_setValue
+// @grant GM_getValue
+// @grant GM_setClipboard
+// @grant unsafeWindow
+// @grant window.close
+// @grant window.focus
 // @require      http://code.jquery.com/jquery-latest.js
+// @noframes
 // ==/UserScript==
 
-
-
-$("div#navbar").ready(main);
-$(document).ready(function(){$("#design_switch").trigger("click");});
+$(document).ready(main);
 
 function main()
 {
     'use strict';
 
     var design=1;
-    var intervall_speed_1=100;
+    var intervall_speed_1=50;
     var intervall_speed_2=2500;
     var timer1 = "";
     var timer2 = "";
@@ -28,12 +31,15 @@ function main()
 
     $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
     $("#design_switch").css("position","fixed").css("top", 13).css("left", 20).css("z-index","4001");
+    $("#design_switch").trigger("click");
 
     function change_design_static(color)
     {
-        $("body").css("background-color",color);
+        $("div#app").css("background-color",color);
         $("div.player-toolbar").css("background-color",color);
+        $("div#leftsidebar").css("background-color",color);
         $("div#topfan-slider").css("background-color",color);
+        $("div#prev-fan").css("background-color",color);
         $("div#chatinput").css("background-color",color);
         $("div.fullscreen-wide").css("background-color",color);
         $("div.tab-icon").css("background-color",color);
@@ -47,8 +53,16 @@ function main()
         $("div.player-toolbar-right").css("background-color",color);
         $("div.newFooter").css("background-color",color);
         $("#playerheader").css("background-color",color);
+        $("div.settings-link").css("background-color",color);
         $("button.next-fan").css("background-color",color);
+        $("button.prev-fan").css("background-color",color);
+        
         $("div#audiencelist.audience").css("background-color",color);
+        $("div .user-summary").css("background-color",color);
+        $("div .user-summary div .user-description").css("background-color",color);
+        $("div .comment-container").css("background-color",color);
+        $("div.navigation ul li a").css("background-color",color);
+        $("ul.list").css("background-color",color);
 
         $("span.selectUILanguages").css("background-color",color);
         $("span.selectUILanguage").css("background-color",color);
@@ -57,11 +71,26 @@ function main()
 
         if (design === 0)
         {
-            $("#design_switch").css("background-color", color).css("color","purple");
+            $("#design_switch")        .css("background-color", color).css("color","purple");
+            $("div .broadcast-info a i") .css("color", color).css("color","#C7C3C3");
+            $("div .broadcast-info a span") .css("color", color).css("color","#C7C3C3");
+            $("div .title span") .css("color", color).css("color","#C7C3C3");
+            $("div .title a") .css("color", color).css("color","purple");
+
+            $("div .sidebar-header .tab-icon i").css("color","#C7C3C3");
+            $("div .sidebar-header .tab-icon span").css("color","#C7C3C3");
+
         }
         else
         {
-            $("#design_switch").css("background-color", color).css("color","black");
+            $("#design_switch")        .css("background-color", color).css("color","black");
+            $("div .broadcast-info a i") .css("color", color).css("color","black");
+            $("div .broadcast-info a span") .css("color", color).css("color","black");
+            $("div .title span") .css("color", color).css("color","black");
+            $("div .title a") .css("color", color).css("color","#C7C3C3");
+
+            $("div .sidebar-header .tab-icon i").css("color","black");
+            $("div .sidebar-header .tab-icon span").css("color","black");
         }
     }
 
@@ -82,7 +111,11 @@ function main()
         $("div.sidebar-container:nth-child(2)").css("background-color",color);
         $("span#guestpanel.sidebar-tab").css("background-color",color);
         $("div.summary-placeholder").css("background-color",color);
-        $("div.guest").css("background-color",color);
+
+        $("div.modal-body").css("background-color",color);
+        
+       
+        
         if (design === 0)
         {
             $("a.chat-name").css("color","#7E7E7C");
