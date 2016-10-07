@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         younow_design_switch
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  switch between bright/dark theme on younow
 // @author       Eduard Fekete
 // @include      *
@@ -30,7 +30,9 @@ function main()
     var color_dark   = "black";
 
     $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
-    $("#design_switch").css("position","fixed").css("top", 13).css("left", 20).css("z-index","4001");
+    $("div.main-channel-detail").append('<input type="button" value="Streamer" id="streamer">');
+    $("input#streamer").css("display","none");
+    $("#design_switch").css("position","fixed").css("top", 13).css("left", 40).css("z-index","4001");
     $("#design_switch").trigger("click");
 
     function change_design_static(color)
@@ -56,6 +58,7 @@ function main()
         $("div.settings-link").css("background-color",color);
         $("button.next-fan").css("background-color",color);
         $("button.prev-fan").css("background-color",color);
+        $("html").css("background-color",color);
         
         $("div#audiencelist.audience").css("background-color",color);
         $("div .user-summary").css("background-color",color);
@@ -125,6 +128,41 @@ function main()
             $("a.chat-name").css("color","black");
         }
     }
+    
+    var toggle1 = true;
+    
+    $("div.main-tags").on
+    (
+        "dblclick",
+        function()
+        {
+            console.log("ausgelöst");
+            
+            if (toggle1)
+            {
+                $(this).css("display","none");
+                
+                $("input#streamer").css("display","block");
+                
+                toggle1 = false;
+            }
+            else
+            {
+                $(this).css("display","block");
+                $("input#streamer").css("display","none");
+                toggle1 = true;
+            }
+        }
+    );
+    
+    $("#streamer").on
+    (
+        "click",
+        function()
+        {
+            $("div.main-tags").trigger("dblclick");
+        }
+    );
 
 
     $("#design_switch").on
@@ -152,7 +190,7 @@ function main()
                 $("div#playerheader .broadcast-info a i").css("color","black");
                 $("div#leftsidebar .channel-menu-content .left-panel .panel-title span").css("color","black");
 
-                timer2 = setInterval      //FÃ¼r statische Inhalte
+                timer2 = setInterval      //Für statische Inhalte
                 (
                     function()
                     {
@@ -161,7 +199,7 @@ function main()
                     intervall_speed_2
                 );
 
-                timer1 = setInterval      //FÃ¼r dynamische Inhalte
+                timer1 = setInterval      //Für dynamische Inhalte
                 (
                     function()
                     {
@@ -191,7 +229,7 @@ function main()
                 $("div#leftsidebar .channel-menu-content .left-panel .panel-title span").css("color","#7E7E7C");
 
 
-                timer2 = setInterval      //FÃ¼r statische Inhalte
+                timer2 = setInterval      //Für statische Inhalte
                 (
                     function()
                     {
@@ -200,7 +238,7 @@ function main()
                     intervall_speed_2
                 );
 
-                timer1 = setInterval      //FÃ¼r dynamische Inhalte
+                timer1 = setInterval      //Für dynamische Inhalte
                 (
                     function()
                     {
