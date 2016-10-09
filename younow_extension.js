@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         younow_design_switch
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  switch between bright/dark theme on younow
 // @author       Eduard Fekete
 // @include      *
@@ -30,6 +30,17 @@ function main()
     var color_dark   = "black";
 
     $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
+    $('div#playerheader').append('<input type="button" value="?" id="rotate_left">');
+    $('div#playerheader').append('<input type="button" value="?" id="rotate_right">');
+    $('input#rotate_left').css({
+        "line-height":"10px",
+        "float":"left"
+    });
+    $('input#rotate_right').css({
+        "line-height":"10px",
+        "float":"right"
+    });
+    
     $("div.main-channel-detail").append('<input type="button" value="Streamer" id="streamer">');
     $("input#streamer").css("display","none");
     $("#design_switch").css("position","fixed").css("top", 13).css("left", 40).css("z-index","4001");
@@ -37,6 +48,8 @@ function main()
 
     function change_design_static(color)
     {
+        $("input#rotate_right").css("background-color",color);
+        $("input#rotate_left").css("background-color",color);
         $("div#app").css("background-color",color);
         $("div.player-toolbar").css("background-color",color);
         $("div#leftsidebar").css("background-color",color);
@@ -82,7 +95,6 @@ function main()
 
             $("div .sidebar-header .tab-icon i").css("color","#C7C3C3");
             $("div .sidebar-header .tab-icon span").css("color","#C7C3C3");
-
         }
         else
         {
@@ -122,12 +134,50 @@ function main()
         if (design === 0)
         {
             $("a.chat-name").css("color","#7E7E7C");
+            $("input#rotate_right").css("color","#7E7E7C");
+            $("input#rotate_left").css("color","#7E7E7C");
         }
         else
         {
+            $("input#rotate_right").css("color","black");
+            $("input#rotate_left").css("color","black");
             $("a.chat-name").css("color","black");
         }
     }
+    
+    //-------------------Drehung----------------------
+    var degree = 0;
+    
+    $("input#rotate_left").on
+    (
+        "click",
+        function()
+        {
+            degree -= 90;
+            rotate(degree);
+        }
+    );
+    
+    $("input#rotate_right").on
+    (
+        "click",
+        function()
+        {
+            degree += 90;
+            rotate(degree);
+        }
+    );
+    
+    function rotate(degree)
+    {
+        $("div.center-in-mask").css({
+            "left":"0px",
+            "top":"0px",
+            "transform" : "rotate("+degree+"deg)"
+        });
+    }
+    
+    //------------------------------------------
     
     var toggle1 = true;
     
