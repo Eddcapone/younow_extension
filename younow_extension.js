@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         younow_design_switch
+// @name         younow_extension
 // @namespace    http://tampermonkey.net/
-// @version      0.5
-// @description  switch between bright/dark theme on younow
+// @version      0.6
+// @description  extend younow with more buttons
 // @author       Eduard Fekete
 // @include      *
 // @grant GM_setValue
@@ -15,12 +15,14 @@
 // @noframes
 // ==/UserScript==
 
-$(document).ready(main);
+$(document).ready(function(){
+    window.setTimeout(main, 1000);
+});
 
 function main()
 {
     'use strict';
-
+    
     var design=1;
     var intervall_speed_1=50;
     var intervall_speed_2=2500;
@@ -31,7 +33,10 @@ function main()
 
     $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
     $('div#playerheader').append('<input type="button" value="?" id="rotate_left">');
-    $('div#playerheader').append('<input type="button" value="?" id="rotate_right">');
+    $('div#playerheader').append('<input type="button" value="?" id="rotate_right">');    
+    $("#design_switch").css("position","fixed").css("top", 13).css("left", 40).css("z-index","4001");
+    $("#design_switch").trigger("click");
+    
     $('input#rotate_left').css({
         "line-height":"10px",
         "float":"left"
@@ -40,11 +45,6 @@ function main()
         "line-height":"10px",
         "float":"right"
     });
-    
-    $("div.main-channel-detail").append('<input type="button" value="Streamer" id="streamer">');
-    $("input#streamer").css("display","none");
-    $("#design_switch").css("position","fixed").css("top", 13).css("left", 40).css("z-index","4001");
-    $("#design_switch").trigger("click");
 
     function change_design_static(color)
     {
@@ -178,42 +178,6 @@ function main()
     }
     
     //------------------------------------------
-    
-    var toggle1 = true;
-    
-    $("div.main-tags").on
-    (
-        "dblclick",
-        function()
-        {
-            console.log("ausgelöst");
-            
-            if (toggle1)
-            {
-                $(this).css("display","none");
-                
-                $("input#streamer").css("display","block");
-                
-                toggle1 = false;
-            }
-            else
-            {
-                $(this).css("display","block");
-                $("input#streamer").css("display","none");
-                toggle1 = true;
-            }
-        }
-    );
-    
-    $("#streamer").on
-    (
-        "click",
-        function()
-        {
-            $("div.main-tags").trigger("dblclick");
-        }
-    );
-
 
     $("#design_switch").on
     (
