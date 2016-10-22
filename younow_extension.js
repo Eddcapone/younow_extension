@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         younow_extension
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      0.7
 // @description  extend younow with more buttons
 // @author       Eduard Fekete
 // @include      *
@@ -15,8 +15,15 @@
 // @noframes
 // ==/UserScript==
 
+var checkExistenceTimer = "";
+var timer1 = "";
+var timer2 = "";
+var debug = 0;
+
+if (debug === 0) { console.log = function() {}; }
+
 $(document).ready(function(){
-    window.setTimeout(main, 1000);
+    setInterval(function(){main();},2500);
 });
 
 function main()
@@ -26,16 +33,25 @@ function main()
     var design=1;
     var intervall_speed_1=50;
     var intervall_speed_2=2500;
-    var timer1 = "";
-    var timer2 = "";
     var color_bright = "white";
     var color_dark   = "black";
-
-    $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
-    $('div#playerheader').append('<input type="button" value="?" id="rotate_left">');
-    $('div#playerheader').append('<input type="button" value="?" id="rotate_right">');    
+    
+    console.log("MAIN() --------------------------------------------- ");
+     
     $("#design_switch").css("position","fixed").css("top", 13).css("left", 40).css("z-index","4001");
     $("#design_switch").trigger("click");
+    
+    var check = check_existence();
+    
+    if (check === false)
+    {
+        //Checken ob die Buttons korrekt angelegt wurden
+        if (checkExistenceTimer !== "")
+        {
+            console.log("checkExistenceTimer wird gestartet." );
+            checkExistenceTimer = setInterval(function(){ check_existence(); },100);
+        }
+    }
     
     $('input#rotate_left').css({
         "line-height":"10px",
@@ -263,4 +279,70 @@ function main()
             }
         }
     );
+}
+
+
+
+function check_existence()
+{
+    var cex_counter_all= 0;
+    console.log("check_existence()");
+    
+    var check_rl = $('#rotate_left').length;
+    var check_rr = $('#rotate_right').length;
+    var check_ds = $('#design_switch').length;
+    
+    if (check_rl === 0) 
+    {
+        $('div#playerheader').append('<input type="button" value="?" id="rotate_left">');
+        if ($('#rotate_left').length === 1)
+            console.log("\trotate_left wurde erstellt.");
+        else
+            console.log("\trotate_left konnte nicht erstellt werden.");
+    }
+    else if (check_rl === 1)
+        console.log("\trotate_left existiert.");
+    
+    //--------------------------------------------
+    
+    if (check_rr === 0) 
+    {
+        $('div#playerheader').append('<input type="button" value="?" id="rotate_right">');
+        if ($('#rotate_right').length === 1)
+            console.log("\trotate_right wurde erstellt.");
+        else
+            console.log("\trotate_right konnte nicht erstellt werden.");
+        
+    }
+    else if (check_rr === 1)
+        console.log("\trotate_right existiert.");
+    
+    //--------------------------------------------
+    
+    if (check_ds === 0) 
+    {
+        $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
+        if ($('#design_switch').length === 1)
+            console.log("\tdesign_switch wurde erstellt.");
+        else
+            console.log("\tdesign_switch konnte nicht erstellt werden.");
+    }
+    else if (check_ds === 1)
+        console.log("\tdesign_switch existiert.");
+    
+    //--------------------------------------------
+    
+    cex_counter_all = check_rl + check_rr + check_ds;
+    
+    if (cex_counter_all === 3)
+    {
+       if (checkExistenceTimer !== "")
+       {
+           clearInterval(checkExistenceTimer);
+           console.log("Alle Buttons existieren. Timer wird gelöscht.");
+       }
+       return true;
+    }
+    
+    return false;
 }
