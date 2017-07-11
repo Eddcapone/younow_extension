@@ -33,7 +33,7 @@ var color_dark   = "black";
 
 
 var ban = [
-    {username: "Blitzlich", onlyRemovePicture: true},
+    {username: "Blitzlicht", onlyRemovePicture: true},
 ];
 
 const regexChatName = /^"\\n\s+(.+)\\n\s+"$/g;
