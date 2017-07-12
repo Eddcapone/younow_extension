@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         younow_extension
 // @namespace    http://tampermonkey.net/
 // @version      1.0
@@ -27,6 +27,7 @@ var timer2 = "";
 var intervall_speed_1=50;
 var intervall_speed_2=2000;
 var design= 1;
+var mirrored=0;
 var degree = 0;
 var color_bright = "white";
 var color_dark   = "black";
@@ -144,7 +145,8 @@ function change_design_static(color)
 
     if (design === 0)
     {
-        $("#design_switch")        		.css("background-color", color).css("color","purple");
+        $("#design_switch")        		.css("background-color", color).css("color","green");
+		$("#mirror_switch")        		.css("background-color", color).css("color","green");
         $("div .broadcast-info a i") 	.css("color", color).css("color","#C7C3C3");
         $("div .broadcast-info a span") .css("color", color).css("color","#C7C3C3");
         $("div .title span") 			.css("color", color).css("color","#C7C3C3");
@@ -198,6 +200,8 @@ function change_design_dynamic(color)
     }
 }
 
+
+
 function create_elements()
 {
     //Wenn das Profilfenster geöffnet ist
@@ -240,6 +244,7 @@ function create_elements()
     var check_rl = $('#rotate_left').length;
     var check_rr = $('#rotate_right').length;
     var check_ds = $('#design_switch').length;
+	var check_ms = $('#mirror_switch').length;
 
     if (check_rl === 0) {
         $('div#playerheader').append('<input type="button" value="⟲" id="rotate_left">');
@@ -291,86 +296,129 @@ function create_elements()
     //--------------------------------------------
 
     if (check_ds === 0) {
-        $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
+        $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');		
+		
         if ($('#design_switch').length === 1) {
             console.log("\tdesign_switch wurde erstellt.");
 
-            $("#design_switch").css("position","fixed").css("top", 13).css("left", 40).css("z-index","4001");
+            $("#design_switch").css("position","fixed").css("top", 8).css("left", 10).css("z-index","4001");
             $("#design_switch").trigger("click");
 
-            $("#design_switch").on("click", function() {
-                if(design === 0) {
-
-                    console.log("design_switch on click design:"+design);
-
-                    design = 1;
-                    change_design_static(color_bright);
-                    $(this).val("Bright Theme");
-
-                    clearInterval(timer1);
-                    clearInterval(timer2);
-
-                    $("div.line-clamp").css("display","none");
-                    $("div.broadcaster-description").css("display","none");
-                    $("div.viewer-name").css("color","black");
-                    $("div.short-text").css("color","black");
-                    $("div#leftsidebar.panel-title").css("color","black");
-                    $("input#commentInput").css("background-color","white");
-                    $("div#playerheader .broadcast-info span").css("color","black");
-                    $("div#playerheader .broadcast-info a").css("color","black");
-                    $("div#playerheader .broadcast-info a i").css("color","black");
-                    $("div#leftsidebar .channel-menu-content .left-panel .panel-title span").css("color","black");
-
-                    //Für statische Inhalte
-                    timer2 = setInterval(function() {
-                        change_design_static(color_bright);
-                    },intervall_speed_2);
-
-                    //Für dynamische Inhalte
-                    timer1 = setInterval(function() {
-                        change_design_dynamic(color_bright);
-                    },intervall_speed_1);
-
-                } else if (design === 1) {
-                    console.log("design_switch on click design:"+design);
-                    design = 0;
-                    change_design_static(color_dark);
-                    $(this).val("Dark Theme");
-
-                    clearInterval(timer1);
-                    clearInterval(timer2);
-
-                    $("div.line-clamp").css("display","none");
-                    $("div.broadcaster-description").css("display","none");
-                    $("div.viewer-name").css("color","white");
-                    $("div.short-text").css("color","white");
-                    $("input#commentInput").css("background-color","rgb(200,200,200)");
-
-                    $("div#playerheader .broadcast-info span").css("color","#7E7E7C");
-                    $("div#playerheader .broadcast-info a").css("color","#2a85d8");
-                    $("div#playerheader .broadcast-info a i").css("color","#7E7E7C");
-                    $("div#leftsidebar .channel-menu-content .left-panel .panel-title span").css("color","#7E7E7C");
-
-                    //Für statische Inhalte
-                    timer2 = setInterval(function() {
-                        change_design_static(color_dark);
-                    },
-                                         intervall_speed_2
-                                        );
-
-                    //Für dynamische Inhalte
-                    timer1 = setInterval(function() {
-                        change_design_dynamic(color_dark);
-                    },
-                                         intervall_speed_1
-                                        );
-                }
-            }
-                                  );
+            
         } else {
-            console.log("\tdesign_switch konnte nicht erstellt werden.");
+            console.log("\tButton design_switch konnte nicht erstellt werden.");
         }
+		
+		
     } else if (check_ds === 1) {
-        console.log("\tdesign_switch existiert.");
+        console.log("\ttButton design_switch existiert.");
     }
+	
+	if (check_ms === 0) {
+		$('div#app').append('<input type="button" value="Mirror Video" id="mirror_switch">');
+		
+        if ($('#mirror_switch').length === 1) {
+            console.log("\tButton mirror_switch wurde erstellt.");
+
+            $("#mirror_switch").css("position","fixed").css("top", 33).css("left", 10).css("z-index","4001");
+            //$("#mirror_switch").trigger("click");
+
+            
+        } else {
+            console.log("\tButton mirror_switch konnte nicht erstellt werden.");
+        }
+	} else {
+		console.log("\ttButton mirror_switch existiert.");
+	}
 }
+
+function setCookie(c_name, value, expiredays)
+{
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate()+expiredays);
+    document.cookie = c_name + "=" + escape(value) + ((expiredays===null) ?
+        "" :
+        ";expires="+exdate.toUTCString());
+}
+
+$("body").on("click", "#design_switch", function() {
+	if(design === 0) {
+
+		console.log("design_switch on click design:"+design);
+
+		design = 1;
+		change_design_static(color_bright);
+		$(this).val("Bright Theme");
+
+		clearInterval(timer1);
+		clearInterval(timer2);
+
+		$("div.line-clamp").css("display","none");
+		$("div.broadcaster-description").css("display","none");
+		$("div.viewer-name").css("color","black");
+		$("div.short-text").css("color","black");
+		$("div#leftsidebar.panel-title").css("color","black");
+		$("input#commentInput").css("background-color","white");
+		$("div#playerheader .broadcast-info span").css("color","black");
+		$("div#playerheader .broadcast-info a").css("color","black");
+		$("div#playerheader .broadcast-info a i").css("color","black");
+		$("div#leftsidebar .channel-menu-content .left-panel .panel-title span").css("color","black");
+
+		//Für statische Inhalte
+		timer2 = setInterval(function() {
+			change_design_static(color_bright);
+		},intervall_speed_2);
+
+		//Für dynamische Inhalte
+		timer1 = setInterval(function() {
+			change_design_dynamic(color_bright);
+		},intervall_speed_1);
+
+	} else if (design === 1) {
+		console.log("design_switch on click design:"+design);
+		design = 0;
+		change_design_static(color_dark);
+		$(this).val("Dark Theme");
+
+		clearInterval(timer1);
+		clearInterval(timer2);
+
+		$("div.line-clamp").css("display","none");
+		$("div.broadcaster-description").css("display","none");
+		$("div.viewer-name").css("color","white");
+		$("div.short-text").css("color","white");
+		$("input#commentInput").css("background-color","rgb(200,200,200)");
+
+		$("div#playerheader .broadcast-info span").css("color","#7E7E7C");
+		$("div#playerheader .broadcast-info a").css("color","#2a85d8");
+		$("div#playerheader .broadcast-info a i").css("color","#7E7E7C");
+		$("div#leftsidebar .channel-menu-content .left-panel .panel-title span").css("color","#7E7E7C");
+
+		//Für statische Inhalte
+		timer2 = setInterval(function() {
+			change_design_static(color_dark);
+		},intervall_speed_2);
+
+		//Für dynamische Inhalte
+		timer1 = setInterval(function() {
+			change_design_dynamic(color_dark);
+		},intervall_speed_1);
+	}
+});
+
+$("body").on("click","#mirror_switch", function() {
+	var x;
+	
+	if (mirrored === 1) {
+		x = 0;
+		mirrored = 0;
+	} else {
+		x = 180;
+		mirrored = 1;
+	}
+	$(".player-main").css({
+		"transform": "rotateY("+ x +"deg)",
+		"-webkit-transform": "rotateY("+ x +"deg)",
+		"-moz-transform": "rotateY("+ x +"deg)",
+	});
+});
