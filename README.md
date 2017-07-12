@@ -1,6 +1,6 @@
 # YouNow Extension Script
 <center><h2>Installation</h2></center>
-1. Download <a href="http://lmgtfy.com/?q=tampermonkey">Tampermonkey</a>.
+1. Download <a href="http://lmgtfy.com/?q=tampermonkey">Tampermonkey</a>.<br>
 2. Add this script.
 
 <center><h2>Features</h2></center>
