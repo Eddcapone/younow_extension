@@ -4,21 +4,21 @@
 2. Add this script.
 
 <center><h2>Features</h2></center>
-<b>Dark Theme</b>
+<h4>Dark Theme</h4>
 This script adds a button to the top left at younow which allows the user to switch between the original younow theme and a dark theme.
 
 <img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example.png">
 
 <b>Note:</b> Does still need improvement and does not fully support the website because younow changed their CSS a while ago.
 
-<b>Rotate Buttons:</b>
+<h4>Rotate Buttons:</h4>
 Streamers are sometimes streaming with their camera or smartphone rotated, e.g. because they have to charge the smartphone.
 This extension adds two buttons above the video which allows you to rotate the video.
 
 <img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example2.png">
 
-<h3>How To</h3>
-<b>Hide annoying users in the chat (Only for advanced users)</b>
+<h4>Ban user or pic</h4>
+<b>Hide annoying users in the chat</b> (Only for advanced users)
 
 You can hide people in the chat completly or just hide their profile picture if it is annoying.
 The integrated block function from younow is a joke and only enables streamers to ban people,
