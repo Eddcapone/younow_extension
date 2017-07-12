@@ -4,8 +4,13 @@
 2. Add this script.
 
 <center><h2>Features</h2></center>
+<h4>Mirror Button</h4>
+Use the mirror button to mirror the video stream.
+
+<img src="https://github.com/Eddcapone/younow_extension/blob/master/images/mirror.JPG?raw=true">
+
 <h4>Dark Theme</h4>
-This script adds a button to the top left at younow which allows the user to switch between the original younow theme and a dark theme.
+Adds a button to the top left at younow which allows the user to switch between the original younow theme and a dark theme.
 
 <img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example.png">
 
