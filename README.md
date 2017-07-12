@@ -4,11 +4,11 @@
 This script adds a button to the top left at younow which allows the user to switch between the original younow theme and a dark theme.
 
 <img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example.png">
-<img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example2.png">
 
+<b>Note:</b> Does still need improvement and does not fully support the website because younow changed their CSS a while ago.
 
 <b>Rotate Buttons:</b>
-It happens often that streamers are streaming with their camera or smartphone rotated, e.g. because they have to charge the smartphone.
+Streamers are sometimes streaming with their camera or smartphone rotated, e.g. because they have to charge the smartphone.
 This extension adds two buttons above the video which allows you to rotate the video.
 
 <img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example2.png">
