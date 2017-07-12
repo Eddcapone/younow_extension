@@ -3,7 +3,7 @@
 <b>Dark Theme</b>
 This script adds a button to the top left at younow which allows the user to switch between the original younow theme and a dark theme.
 
-<img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example1.png">
+<img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example.png">
 <img src="https://raw.githubusercontent.com/Eddcapone/younow_extension/master/images/example2.png">
 
 
