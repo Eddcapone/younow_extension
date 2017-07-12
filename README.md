@@ -17,7 +17,7 @@ This extension adds two buttons above the video which allows you to rotate the v
 <b>Hide annoying users in the chat (Only for advanced users)</b>
 
 You can hide people in the chat completly or just hide their profile picture if it is annoying.
-The integrated block function from younow is a joke and only enables streamers to block people in the chat,
+The integrated block function from younow is a joke and only enables streamers to ban people,
 however, if you are watching a stream and block an annoying user, then you can still see his messages and interact with him,
 even though you blocked him. Blocking will just ban people from your own stream.
 
