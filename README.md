@@ -1,4 +1,8 @@
 # YouNow Extension Script
+<center><h2>Installation</h2></center>
+1. Download <a href="http://lmgtfy.com/?q=tampermonkey">Tampermonkey</a>.
+2. Add this script.
+
 <center><h2>Features</h2></center>
 <b>Dark Theme</b>
 This script adds a button to the top left at younow which allows the user to switch between the original younow theme and a dark theme.
