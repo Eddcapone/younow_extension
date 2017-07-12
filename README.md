@@ -38,7 +38,10 @@ even though you blocked him. Blocking will just ban people from your own stream.
   </pre>
   
   You can see it already contains an object of a user. It is a user with a really annoying flashing profile picture.
-  <code>{username: "Blitzlicht", onlyRemovePicture: true},</code> just duplicate this line and use it as template
+  
+  <br><code>{username: "Blitzlicht", onlyRemovePicture: true},</code></br>
+  
+  just duplicate this line and use it as template
   for the user you want to block, just enter his exact username (case-sensitive!) to username like shown below:
   
   <pre>
