@@ -246,7 +246,7 @@ function create_elements()
 	var check_ms = $('#mirror_switch').length;
 
     if (check_rl === 0) {
-        $('div.player-overlay').append('<input type="button" value="⟲" id="rotate_left" style="position: absolute; z-index: 1000;">');
+        $('div.player-overlay').append('<input type="button" value="⟲" id="rotate_left" style="position: absolute; z-index: 1000; bottom: 0px; border: 0px;">');
         if ($('#rotate_left').length === 1) {
             console.log("\trotate_left wurde erstellt.");
 
@@ -270,7 +270,7 @@ function create_elements()
     //--------------------------------------------
 
     if (check_rr === 0) {
-        $('div.player-overlay').append('<input type="button" value="⟳" id="rotate_right" style="position: absolute; z-index: 1000; right: 0;">');
+        $('div.player-overlay').append('<input type="button" value="⟳" id="rotate_right" style="position: absolute; z-index: 1000; left: 28px; bottom: 0px; border: 0px; border-left: 1px solid #c9c1c166;">');
         if ($('#rotate_right').length === 1) {
             //console.log("\trotate_right wurde erstellt.");
 
