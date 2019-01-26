@@ -32,7 +32,6 @@ var degree = 0;
 var color_bright = "white";
 var color_dark   = "black";
 
-
 var ban = [
     {username: "Blitzlicht", onlyRemovePicture: true},
 ];
@@ -247,7 +246,7 @@ function create_elements()
 	var check_ms = $('#mirror_switch').length;
 
     if (check_rl === 0) {
-        $('div#playerheader').append('<input type="button" value="⟲" id="rotate_left">');
+        $('div.player-overlay').append('<input type="button" value="⟲" id="rotate_left" style="position: absolute; z-index: 1000;">');
         if ($('#rotate_left').length === 1) {
             console.log("\trotate_left wurde erstellt.");
 
@@ -271,7 +270,7 @@ function create_elements()
     //--------------------------------------------
 
     if (check_rr === 0) {
-        $('div#playerheader').append('<input type="button" value="⟳" id="rotate_right">');
+        $('div.player-overlay').append('<input type="button" value="⟳" id="rotate_right" style="position: absolute; z-index: 1000; right: 0;">');
         if ($('#rotate_right').length === 1) {
             //console.log("\trotate_right wurde erstellt.");
 
@@ -296,34 +295,34 @@ function create_elements()
     //--------------------------------------------
 
     if (check_ds === 0) {
-        $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');		
-		
+        $('div#app').append('<input type="button" value="Bright Theme" id="design_switch">');
+
         if ($('#design_switch').length === 1) {
             console.log("\tdesign_switch wurde erstellt.");
 
             $("#design_switch").css("position","fixed").css("top", 8).css("left", 10).css("z-index","4001");
             $("#design_switch").trigger("click");
 
-            
+
         } else {
             console.log("\tButton design_switch konnte nicht erstellt werden.");
         }
-		
-		
+
+
     } else if (check_ds === 1) {
         console.log("\ttButton design_switch existiert.");
     }
-	
+
 	if (check_ms === 0) {
 		$('div#app').append('<input type="button" value="Mirror Video" id="mirror_switch">');
-		
+
         if ($('#mirror_switch').length === 1) {
             console.log("\tButton mirror_switch wurde erstellt.");
 
             $("#mirror_switch").css("position","fixed").css("top", 33).css("left", 10).css("z-index","4001");
             //$("#mirror_switch").trigger("click");
 
-            
+
         } else {
             console.log("\tButton mirror_switch konnte nicht erstellt werden.");
         }
@@ -408,7 +407,7 @@ $("body").on("click", "#design_switch", function() {
 
 $("body").on("click","#mirror_switch", function() {
 	var x;
-	
+
 	if (mirrored === 1) {
 		x = 0;
 		mirrored = 0;
